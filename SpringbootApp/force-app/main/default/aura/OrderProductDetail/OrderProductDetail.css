@@ -1,0 +1,15 @@
+.THIS {
+}
+.THIS .label{
+    font-weight: bold;
+    display: block;
+}
+.THIS .imageview{
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:100px;
+    margin:2px;
+}
+.THIS .box{
+    font-size: 15px;
+}

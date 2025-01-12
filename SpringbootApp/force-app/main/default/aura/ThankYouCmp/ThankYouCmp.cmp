@@ -1,0 +1,49 @@
+<aura:component controller="ProductSearchController" 
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,lightning:isUrlAddressable"
+    access="global">
+
+    <aura:attribute name="id" type="String" />
+    
+    <aura:handler name="change" value="{!v.pageReference}" action="{!c.onPageReferenceChange}"/>
+    Hello {!v.id}.
+
+    <aura:attribute name="orderId" type="String"/>
+    <aura:attribute name="status" type="String"/>
+    <aura:attribute name="productDetail" type="OrderProductJunction__c[]"/>
+    <aura:attribute name="orderDetail" type="Order__c"/>
+
+<!--aura:handler name="init" value="{!this}" action="{!c.doInit}" /-->
+
+<!--Markup for detail Page-->
+<lightning:card iconName="standard:thanks">
+    <p class="slds-p-horizontal_small">
+        <lightning:layout>
+            <lightning:layoutItem flexibility="grow" size="6" mediumDeviceSize="6" largeDeviceSize="6">
+
+                <div class="slds-p-horizontal--small">
+                    <div class="productProperty">
+                        <span class="label">Order Id :  </span>
+                        <span>
+                            <lightning:formattedText value="{!v.orderDetail.Name}" /></span>
+                    </div>
+                    <aura:iteration items="{!v.productDetail}" var="productDetail">
+
+                    <div class="productProperty">
+                        <span class="label">Product Name  :  </span>
+                        <span>
+                            <lightning:formattedText value="{!v.productDetail.Product__r.Product_Name__c}" /></span>
+                    </div>
+                </aura:iteration>
+            </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+                   
+
+      
+
+    </p>
+    </lightning:card>
+
+
+
+</aura:component>

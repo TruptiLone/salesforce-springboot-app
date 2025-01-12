@@ -1,0 +1,108 @@
+<aura:component controller="ProductSearchController"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes"
+    access="global">
+    <aura:attribute name="componentId" type="String"/>
+    <aura:attribute name="cardnumber" type="String" />
+    <aura:attribute name="fullname" type="string" />
+    <aura:attribute name="expiry" type="date" />
+    <aura:attribute name="cvv" type="Integer" />
+    <aura:attribute name="response" type="String"/>
+    <aura:attribute name="total" type="Integer" />
+
+    <aura:attribute name="orderId" type="String"/>
+
+    <aura:attribute name="url" type="String"/>
+    
+    <!-- Specify the pageReference type. Only object is supported. -->
+    <aura:attribute name="pageReference" type="Object"/>
+  
+ 
+    <!-- Implement the navigation service. -->
+    <lightning:navigation aura:id="navService"/>
+ 
+    <!-- pageReferenceUtil component -->
+    <lightning:pageReferenceUtils aura:id="pageRefUtils"/>
+
+    <aura:registerEvent name="PassOrderId" type="c:PassOrderId"/>
+   
+ 
+  
+    
+    <lightning:card iconName="standard:thanks"  title="Payment">
+        <lightning:layout>
+        <lightning:layoutItem flexibility="auto" padding="around-small">
+            <div class="lisa">Total Amount : ${!v.total}</div>  
+            
+
+        </lightning:layoutItem>
+        </lightning:layout>
+        <div class="c-container">
+            <lightning:layout>
+                <lightning:layoutItem flexibility="auto" padding="around-small">
+                    <div class="box">
+                        <div class="label">Card Details :</div>  
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+        
+        <div class="c-container">
+            <lightning:layout>
+                <lightning:layoutItem flexibility="auto" padding="around-small">
+                    <div class="custom-box">
+                        <lightning:input label="Card Number"  name="cardnumber" value="{!v.cardnumber}" required="true" />
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+        <div class="c-container">
+            <lightning:layout>
+                <lightning:layoutItem flexibility="auto" padding="around-small">
+                    <div class="custom-box">
+                        <lightning:input label="Full Name"  name="fullname" value="{!v.fullname}" required="true" />
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+        <div class="c-container">
+            <lightning:layout>
+                <lightning:layoutItem flexibility="auto" padding="around-small">
+                    <div class="custom-box">
+                        <lightning:input label="Expiry"  name="expiry" type="date" value="{!v.expiry}" required="true" />
+
+                    </div>
+                    
+                </lightning:layoutItem>
+                <lightning:layoutItem flexibility="auto" padding="around-small">
+                    <div class="custom-box">
+                        <lightning:input label="CVV"  name="cvv" type="password" value="{!v.cvv}" required="true" />
+                    </div>
+                    
+                </lightning:layoutItem>
+                  <lightning:layoutItem flexibility="auto" padding="around-small">
+                    <div class="custom-box">
+                        <lightning:input label="CVV"  name="cvv" type="password" value="{!v.cvv}" required="true" />
+                    </div>
+                    
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+
+        <div class="c-container">
+            <lightning:layout>
+                <lightning:layoutItem flexibility="auto" padding="around-small">
+                    <div class="custom-box">
+                        <button class="slds-button slds-button_brand" onclick="{!c.submit}">Submit</button>
+                       
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+       
+    </lightning:card>
+    
+    
+	
+    	
+
+</aura:component>

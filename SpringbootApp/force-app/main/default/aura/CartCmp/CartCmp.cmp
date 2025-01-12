@@ -1,0 +1,139 @@
+<aura:component controller="ProductSearchController"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes"
+   access="global">
+
+    
+
+    <aura:attribute name="cart" type="Cart__c"/>
+    <aura:attribute name="cartItems" type="ProductCartJunction__c[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="options" type="List"/>
+   
+    <aura:handler event="force:refreshView" action="{!c.doInit}" />
+    <aura:attribute name="total" type="Integer"/>
+    <aura:attribute name="cadPrice" type="Decimal" default="0.00"/>
+    <aura:attribute name="eurPrice" type="Decimal" default="0.00"/>
+    <aura:attribute name="cadPriceTotal" type="Decimal" default="0.00"/>
+    <aura:attribute name="eurPriceTotal" type="Decimal" default="0.00"/>
+
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:handler event="c:AddToCart" action="{!c.doInit}"/>
+   
+   
+
+    <!--aura:registerEvent name="OrderEvent" type="c:OrderEvent"/-->
+
+
+
+
+    <div class="c-container">
+        <lightning:layout>
+            <lightning:layoutItem size="7" padding="around-small">
+                <div class="label">Product Name :</div>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="7" padding="around-small">
+                <div class="label">Price</div>
+            </lightning:layoutItem>
+            <!--lightning:layoutItem flexibility="auto" padding="around-small">
+                <div class="label">CAD</div>
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="auto" padding="around-small">
+                <div class="label">EUR</div>
+            </lightning:layoutItem-->
+            
+        </lightning:layout>
+    </div>
+
+            <aura:iteration items="{!v.cartItems}" var="cart">
+            <div class="c-container">
+                <lightning:layout>
+                    <lightning:layoutItem size="7" padding="around-small">
+                        <div class="custom-box">{!cart.Product__r.Product_Name__c}</div>
+                        <lightning:buttonIcon iconName="utility:delete" size="small" variant="container" onclick="{!c.delete}" alternativeText="Settings" 
+                        title="Settings" value="{!cart.Id}" />
+                    </lightning:layoutItem>
+
+                    <lightning:layoutItem size="7"  padding="around-small">
+                        <div class="custom-box"> {!cart.Product__r.Price__c}  $
+                            <div class="custom-box"> {!cart.CadPrice}  CAD</div>
+                            <div class="custom-box"> {!cart.EurPrice}  EUR</div>
+                      
+                    </div>
+                </lightning:layoutItem>
+                    <!--lightning:layoutItem flexibility="auto"  padding="around-small">
+                        <div class="custom-box">{!cart.CadPrice}</div>
+                        
+                    </lightning:layoutItem>
+                    <lightning:layoutItem flexibility="auto"  padding="around-small">
+                        
+                        <div class="custom-box">{!cart.EurPrice}</div>
+                    </lightning:layoutItem-->
+                    
+
+                    
+
+                  
+                </lightning:layout>
+            </div>
+        
+
+        </aura:iteration>
+
+        
+
+        <div class="c-container">
+            <lightning:layout>
+                <lightning:layoutItem size="7" padding="around-medium">
+                    <div class="label">Total :</div>
+                </lightning:layoutItem>
+                <lightning:layoutItem size="8" padding="around-medium">
+                    <div class="label">$ {!v.total}</div>
+                </lightning:layoutItem>
+                
+            </lightning:layout>
+        </div>
+
+        <!--div class="c-container">
+            <lightning:layout>
+                <lightning:layoutItem size="7" padding="around-medium">
+                    <div class="label">Convert To :</div>
+                    <lightning:button variant="brand" label="convert" title="Brand action" onclick="{! c.convert }"></lightning:button>
+               
+                </lightning:layoutItem>
+                <lightning:layoutItem size="8" padding="around-medium">
+                   
+                    <div class="from-select">
+                        <lightning:select aura:id="from" name="select1" label="" onchange="{! c.onchange }">
+                        <aura:iteration items="{!v.options}" var="option">
+                            <option text="{!option.label}" value="{!option.value}" selected="{!option.selected}"/>
+                        </aura:iteration>
+                        </lightning:select>
+                    </div>
+                </lightning:layoutItem-->
+                
+            <!--/lightning:layout>
+        </div-->
+
+
+        
+            <lightning:layout>
+               
+                <lightning:layoutItem size="7" padding="around-small">
+                    
+                <lightning:button variant="brand" label="Checkout" title="Brand action" onclick="{! c.checkout }"></lightning:button>
+                </lightning:layoutItem>
+                
+            </lightning:layout>
+
+            <!--div aura:id="container">
+                <p><lightning:formattedUrl value="https://springblossom-dev-ed.lightning.force.com/lightning/n/Payment" label="Place Order" /></p>
+            </div>
+        </div-->
+
+            <!--lightning:button variant="brand" label="Checkout" title="Brand action" onclick="{! c.checkout }" /-->
+
+        
+   
+
+</aura:component>

@@ -1,0 +1,41 @@
+<aura:component controller="ProductSearchController"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes"
+    access="global">
+
+    <aura:attribute name="orders" type="Order__c[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <!--Markup for detail Page-->
+    <lightning:card iconName="standard:thanks">
+        <aura:set attribute="title">
+            Your Orders
+        </aura:set>
+        <div class="c-container">
+            <lightning:layout>
+                <lightning:layoutItem flexibility="auto" padding="around-small">
+                    <div class="label">Order Id :</div>
+                </lightning:layoutItem>
+                <lightning:layoutItem flexibility="auto" padding="around-small">
+                    <div class="label">Status</div>
+                </lightning:layoutItem>
+                
+            </lightning:layout>
+        </div>
+    
+                <aura:iteration items="{!v.orders}" var="order">
+                <div class="c-container">
+                    <lightning:layout>
+                        <lightning:layoutItem flexibility="auto" padding="around-small">
+                            <div class="custom-box">{!order.Name}</div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem flexibility="auto" padding="around-small">
+                            <div class="custom-box">{!order.Order_Status__c}</div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+            
+    
+            </aura:iteration>
+    
+    </lightning:card>
+</aura:component>

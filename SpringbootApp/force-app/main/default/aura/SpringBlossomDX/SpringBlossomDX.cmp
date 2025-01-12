@@ -1,0 +1,15 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,forceCommunity:layout" access="global" >
+    <aura:attribute name="column1" type="Aura.Component[]"/>
+    <aura:attribute name="column2" type="Aura.Component[]"/>
+    
+    
+    <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+  <div class="slds-size_1-of-4">
+    <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">{!v.column1}</div>
+  </div>
+  <div class="slds-size_1-of-4">
+    <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">{!v.column2}</div>
+  </div>
+
+</div>
+</aura:component>

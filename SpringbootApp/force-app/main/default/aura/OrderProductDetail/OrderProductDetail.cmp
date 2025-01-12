@@ -1,0 +1,117 @@
+<aura:component controller="ProductSearchController"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes"
+    access="global">
+
+    <aura:attribute name="orderId" type="String" default="a053t0000119e98AAA"/>
+    <aura:attribute name="orderProductDetails" type="OrderProductJunction__c[]"/>
+    <aura:attribute name="orderName" type="String"/>
+    <aura:attribute name="orderStatus" type="String"/>
+    <aura:attribute name="total" type="Integer"/>
+    <aura:attribute name="orderDate" type="Date"/>
+    <aura:handler event="c:PassOrderId" action="{!c.handleOrderId}"/>
+    <aura:attribute name="test" type="List" default="[]" />
+    <aura:iteration items="{!v.test}" var="test" indexVar="indx">
+
+        
+        
+        
+    </aura:iteration>
+
+    
+
+<aura:attribute name="order" type="Order__c[]"/>
+<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+<!--Markup for detail Page-->
+<lightning:card iconName="standard:thanks">
+    <aura:set attribute="title">
+        Order Summary
+    </aura:set>
+    <div class="c-container">
+        <lightning:layout>
+            <!--lightning:layoutItem flexibility="auto" padding="around-small">
+                <div class="label">Order Id :</div>
+                <div class="custom-box">{!v.orderId}</div>
+
+            </lightning:layoutItem-->
+            <lightning:layoutItem flexibility="auto" padding="around-small">
+                <div class="label">Order Id : {!v.orderName}</div>
+                <div class="label">Status : {!v.orderStatus}</div>
+                <div class="label">Date : {!v.orderDate}</div>
+             
+
+            </lightning:layoutItem>
+            <!--lightning:layoutItem flexibility="auto" padding="around-small">
+                <div class="label">Status :</div>
+                <div class="custom-box">{!v.orderStatus}</div>
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="auto" padding="around-small">
+                <div class="label">Date :</div>
+                <div class="custom-box">{!v.orderDate}</div>
+            </lightning:layoutItem-->
+            
+        </lightning:layout>
+        <lightning:layout>
+            <lightning:layoutItem flexibility="auto" padding="around-small">
+                <div class="label">Product Details:</div>
+            </lightning:layoutItem>
+           
+            
+        </lightning:layout>
+    </div>
+
+            <aura:iteration items="{!v.orderProductDetails}" var="order">
+            <div class="c-container">
+                <lightning:layout>
+                    <lightning:layoutItem flexibility="auto" padding="around-small">
+                    <div class="custom-box">{!order.Product__r.Product_Name__c}</div>
+                    <div class="custom-box">Price : {!order.Product__r.Price__c}</div>
+                    <div class="imageview" style="{!'background-image:url(\''+order.Product__r.Product_Image_1__c+'\')'}" />
+                </lightning:layoutItem>
+                </lightning:layout>
+               
+               
+                <!--lightning:layout>
+                    <lightning:layoutItem size="3" padding="around-small">
+                        <div class="custom-box">Product Image :</div>
+                        <div class="custom-box">{!order.Product__r.Product_Image_1__c}</div>
+                       
+                    <div class="imageview" style="{!'background-image:url(\''+order.Product__r.Product_Image_1__c+'\')'}" />
+                
+                    </lightning:layoutItem>
+
+                    <lightning:layoutItem size="3" padding="around-small">
+                        <div class="custom-box">Product Name :</div>
+                        <div class="custom-box">{!order.Product__r.Product_Name__c}</div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="3" padding="around-small">
+                        <div class="custom-box">Price :</div>
+                        <div class="custom-box">{!order.Product__r.Price__c}</div>
+                    </lightning:layoutItem>
+                </lightning:layout-->
+            </div>
+        
+
+        </aura:iteration>
+        <lightning:layout>
+                    <lightning:layoutItem size="3" padding="around-small">
+                        <div class="box">Subtotal : {!v.total}</div>
+                        <!--div class="custom-box">{!order.Product__r.Product_Image_1__c}</div-->
+                       
+                    
+                    </lightning:layoutItem>
+                    </lightning:layout>
+                    <div class="c-container">
+                        <lightning:layout>
+                            <lightning:layoutItem flexibility="auto" padding="around-small">
+                                <div class="custom-box">
+                                    <button class="slds-button slds-button_brand" onclick="{!c.viewmore}">View More</button>
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+
+</lightning:card>
+
+
+</aura:component>

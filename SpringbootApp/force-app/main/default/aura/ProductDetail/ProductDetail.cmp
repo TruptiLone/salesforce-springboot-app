@@ -1,0 +1,76 @@
+<aura:component
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes"
+    access="global">
+    <aura:attribute name="product" type="Product__c" />
+    <aura:attribute name="cart" type="Cart__c" />
+
+    <aura:registerEvent name="AddToCart" type="c:AddToCart"/>
+
+   
+    <aura:method name="performDoInit" action="{!c.doInit}" access="public">
+       
+    </aura:method>
+
+
+    <!-- Junction Object Creation-->
+    <aura:attribute name="newProductCartJunction" type="Object"/>
+    <aura:attribute name="inputNewProductCartJunction" type="Object"/>
+    <aura:attribute name="newProductCartJunctionError" type="String"/>
+    <force:recordData aura:id="ProductCartJunctionRecordCreator"
+                    fields="Cart__c,Product__c,Name"
+                    targetRecord="{!v.newProductCartJunction}"
+                    targetFields ="{!v.inputNewProductCartJunction}"
+                    targetError="{!v.newProductCartJunctionError}"
+    />
+<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!-- Display the new contact form -->
+   
+    <!-- Display Lightning Data Service errors -->
+    <aura:if isTrue="{!not(empty(v.newProductCartJunctionError))}">
+        <div class="recordError">
+            {!v.newProductCartJunctionError}
+        </div>
+    </aura:if>
+
+
+   <!--Markup for detail Page-->
+    <lightning:card iconName="standard:thanks">
+        <aura:set attribute="title">
+            {!v.product.Product_Name__c} Products
+        </aura:set>
+        <p class="slds-p-horizontal_small">
+            <lightning:layout>
+                <lightning:layoutItem flexibility="grow" size="6" mediumDeviceSize="6" largeDeviceSize="6">
+                    <div class="slds-p-horizontal--small">
+                        <div class="productProperty">
+                            <span class="label">Product Description  :  </span>
+                            <span>
+                                <lightning:formattedText value="{!v.product.Additional_Product_Information__c}" /></span>
+                        </div>
+                        <div class="productProperty">
+                            <span class="label">Type  :  </span>
+                            <span>
+                                <lightning:formattedText value="{!v.product.Product_Type__r.Name}" /></span>
+                        </div>
+                        <div class="productProperty">
+                            <span class="label">Price  :  </span>
+                            <span>
+                                <lightning:formattedNumber value="{!v.product.Price__c}" /></span>
+                        </div>                   
+                    </div>
+    
+                </lightning:layoutItem>
+                <lightning:layoutItem flexibility="grow" size="10" mediumDeviceSize="6" largeDeviceSize="6">
+                    <div class="imageview" style="{!'background-image:url(\''+v.product.Product_Image_1__c+'\')'}" />
+                </lightning:layoutItem>
+            </lightning:layout>
+
+            <!-- Brand variant: Identifies the primary action in a group of buttons -->
+        <lightning:button variant="brand" label="Add To Cart" title="Brand action" onclick="{! c.addToCart }" />
+
+
+        </p>
+    </lightning:card>
+
+
+</aura:component>

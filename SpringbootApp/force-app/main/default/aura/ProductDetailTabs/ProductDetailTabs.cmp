@@ -1,0 +1,85 @@
+<aura:component controller="ProductSearchController"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes"
+    access="global">
+
+    <aura:attribute name="product" type="Product__c" />
+    <aura:attribute name="cart" type="Cart__c" />
+
+    <aura:attribute name="selectedTabId" type="String" default="detailstab" />
+
+    <!-- show details when a Kart is selected -->
+    <aura:attribute name="showTabs" type="Boolean" default="false" />
+
+    <!-- Id of selected Kart used by force:recordData -->
+    <aura:attribute name="id" type="Id" />
+   
+
+    <!-- save errors when loading data using force:recordData -->
+    <aura:attribute name="recordSaveError" type="String" />
+
+    <!-- handler for application event from Tile -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:SelectedProduct" action="{!c.onProductSelected}" />
+    <!--aura:handler name="AddToCart" event="c:AddToCart" action="{!c.addToCartJunction}"/-->
+    
+    
+    <!--aura:handler name="KartReviewAdded" event="c:KartReviewAdded" action="{!c.onKartReviewAdded}" /--> 
+
+    <force:recordData aura:id="service" 
+                    recordId="{!v.id}" 
+                    fields="Id,
+                            Product_Name__c,
+                            Stock__c,
+                            Product_Type__r.Name,
+                            Price__c,
+                            Product_Image_1__c" 
+                    targetFields="{!v.product}" 
+                    mode="VIEW" 
+                    targetError="{!v.recordSaveError}"
+       />
+        <!-- recordUpdated="{!c.onRecordUpdated}" -->
+
+    <aura:if isTrue="{!not(empty(v.recordSaveError))}">
+        <div>{!v.recordSaveError}</div>
+    </aura:if>
+
+    <lightning:card title="Product Details">
+        <aura:set attribute="actions">
+            <!--lightning:button label="New"/>
+            <lightning:buttonIcon iconName="utility:checkout" variant="bare" onclick="{! c.handleClick }" alternativeText="Settings" title="Settings" /-->
+            <lightning:buttonIcon iconName="utility:cart" size="large" variant="container" onclick="{! c.handleCartIcon}" alternativeText="Settings" title="Settings" />
+
+           
+        </aura:set>
+        <!--aura:if isTrue="{!v.showTabs}">
+            <lightning:tabset selectedTabId="{!v.selectedTabId}">
+                <lightning:tab label="Details" id="detailstab">
+                    <c:ProductDetail product="{!v.product}" cart="{!v.cart}"/>
+                </lightning:tab>    
+            </lightning:tabset>
+            <aura:set attribute="else">
+                <p class="slds-text-align_center"> 
+                    Please Select a Product to View Details and shop.
+                </p>
+            </aura:set>
+        </aura:if-->
+
+        <lightning:tabset aura:id="tabs" selectedTabId="{!v.selectedTabId}">
+
+            <aura:if isTrue="{!v.showTabs}">
+               <lightning:tab label="Details" id="detailstab">
+                   <c:ProductDetail product="{!v.product}" cart="{!v.cart}" aura:id="childCmp"/>
+               </lightning:tab>
+              </aura:if>
+               <lightning:tab label="Cart" id="carttab">
+                   <c:CartCmp cart="{!v.cart}"/>
+               </lightning:tab>
+               <lightning:tab label="Order details" id="ordertab">
+                <c:OrderCmp/>
+            </lightning:tab>
+
+           </lightning:tabset>
+        
+       
+    </lightning:card>
+</aura:component>

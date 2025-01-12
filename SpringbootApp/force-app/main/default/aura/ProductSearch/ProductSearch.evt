@@ -1,0 +1,3 @@
+<aura:event type="Application" description="productSearch">
+    <aura:attribute name="productTypeId" type="String"/>
+</aura:event>

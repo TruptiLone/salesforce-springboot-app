@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Pass Order Id">
+    <aura:attribute name="orderId" type="String" />
+
+</aura:event>

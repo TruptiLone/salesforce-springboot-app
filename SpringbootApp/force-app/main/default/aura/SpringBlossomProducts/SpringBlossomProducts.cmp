@@ -1,0 +1,29 @@
+<aura:component controller="ProductSearchController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="ProductType" type="List"/>
+    <aura:handler name="init" value="{!this}" action ="{!c.doInit}"/>
+    
+    <aura:registerEvent name="productSearch" type="c:ProductSearch"/>
+    
+
+<lightning:card footer="" title="Spring Blossom">
+   
+        <aura:set attribute="actions">
+            
+        </aura:set>
+        <lightning:layout horizontalAlign="center" verticalAlign="end">
+            <lightning:layoutItem class="slds-p-horizontal_small">
+                <lightning:select label="" aura:id="selectedProductType">
+                    <option value="AllProducts">All Products</option>
+                    <aura:iteration items="{!v.ProductType}" var="item">
+                        <option value="{!item.Id}">{!item.Name}</option>
+                    </aura:iteration>
+                    
+                </lightning:select>
+            </lightning:layoutItem>
+            <lightning:layoutItem class="slds-p-horizontal_small">
+                <lightning:button variant="brand" label="Search" onclick="{!c.searchProducts}"></lightning:button>
+            </lightning:layoutItem>
+          
+        </lightning:layout>
+    </lightning:card>
+</aura:component>

@@ -1,0 +1,42 @@
+<template>
+    <lightning-card title="Filters" icon-name="standard:calibration">
+        <div class="slds-m-horizontal_medium">
+            <lightning-input
+                label="Search Key"
+                type="search"
+                onchange={handleSearchKeyChange}
+            ></lightning-input>
+            <section>
+                <lightning-slider
+                    label="Max Price"
+                    step="10"
+                    min="0"
+                    max="200"
+                    value={maxPrice}
+                    onchange={handleMaxPriceChange}
+                ></lightning-slider>
+            </section>
+            <section>
+                <h1>Product Type</h1>
+                <template if:true={types.data}>
+                    <template
+                        for:each={types.data.values}
+                        for:item="type"
+                    >
+                        <lightning-input
+                            key={type.value}
+                            label={type.label}
+                            data-filter="types"
+                            data-value={type.value}
+                            type="checkbox"
+                            checked
+                            onchange={handleCheckboxChange}
+                        ></lightning-input>
+                    </template>
+                </template>
+                
+            </section>
+            </div>
+        </lightning-card>
+    
+</template>

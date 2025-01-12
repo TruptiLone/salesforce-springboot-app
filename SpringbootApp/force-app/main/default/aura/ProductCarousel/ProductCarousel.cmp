@@ -1,0 +1,22 @@
+<aura:component  implements="flexipage:availableForRecordHome,force:hasRecordId,flexipage:availableForAllPageTypes" access="global">
+<aura:attribute name="Product" type="Product__c" />
+
+<aura:registerEvent name="SelectedProduct" type="c:SelectedProduct" />
+
+<lightning:layoutItem size="3" padding="around-medium">
+     <div class="custom-box"  onclick="{!c.onCarouselClick}">
+        <lightning:carousel disableAutoRefresh="true" disableAutoScroll="true" class="test">
+            <lightning:carouselImage
+                src = "{!v.Product.Product_Image_1__c}"
+                header = "{!v.Product.Product_Name__c}"
+                description="{!v.Product.Product_Type__r.Name}">
+            </lightning:carouselImage>
+            <lightning:carouselImage
+                src = "{!v.Product.Product_Image_2__c}"
+                header = "{!v.Product.Product_Name__c}"
+                description="{!v.Product.Product_Type__r.Name}">
+            </lightning:carouselImage>
+        </lightning:carousel>
+    </div>
+</lightning:layoutItem>    
+</aura:component>

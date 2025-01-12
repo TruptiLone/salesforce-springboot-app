@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Basic DOM Example" icon-name="utility:hierarchy">
+        <div class="slds-card__body">
+            <p class="slds-p-horizontal_small">
+                <lightning-formatted-text value={text}></lightning-formatted-text>
+            </p>
+            <p class="slds-p-horizontal_small">
+                <lightning-input onchange={handleChange} label="Input Text" value={text}></lightning-input>
+            </p>
+            <p class="slds-p-horizontal_small">
+                <lightning-input label="Output Text" value={text}></lightning-input>
+            </p>
+        </div>
+    </lightning-card>
+
+</template>

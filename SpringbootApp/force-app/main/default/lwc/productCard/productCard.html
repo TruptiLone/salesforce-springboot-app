@@ -1,0 +1,60 @@
+<template>
+    <lightning-card icon-name="standard:apex_plugin">
+        <template if:true={product.data}>
+            <span slot="title">{product.data.fields.Product_Name__c.value}</span>
+            <lightning-button-icon
+                icon-name="utility:expand_alt"
+                slot="actions"
+                onclick={handleNavigateToRecord}
+            ></lightning-button-icon>
+            <div class="slds-m-horizontal_medium">
+                <img
+                    src={product.data.fields.Product_Image_1__c.value}
+                    class="product"
+                    alt="Product picture"
+                />
+                <div class="row">
+                    <div>Name:</div>
+                    <div>{product.data.fields.Product_Name__c.value}</div>
+                </div>
+                <div class="row">
+                    <div>Type</div>
+                    <div>{product.data.fields.Type__c.value}</div>
+                </div>
+                <div class="row">
+                    <div>Price:</div>
+                    <div>
+                        <lightning-formatted-number
+                            format-style="currency"
+                            currency-code="USD"
+                            value={product.data.fields.Price__c.value}
+                            class="price"
+                        ></lightning-formatted-number>
+                    </div>
+                </div>
+            </div>
+            <div class="c-container">
+                <lightning-layout>
+                    
+                    <div class="slds-m-top_small slds-m-bottom_medium">
+                        <!-- Brand variant: Identifies the primary action in a group of buttons --> 
+                        <lightning-button variant="brand" label="Add to Cart" title="Cart" onclick={handleAddToCart} class="slds-m-left_x-small"></lightning-button>
+                      </div>
+                      <div class="slds-m-top_small slds-m-bottom_medium">
+                        <!-- Brand variant: Identifies the primary action in a group of buttons --> 
+                        <lightning-button label="View Cart" title="proceed" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+                      </div>
+                    </lightning-layout>
+            </div>
+        
+        </template>
+
+        <template if:true={noData}>
+            <c-placeholder
+                message="Select a product to see details"
+            ></c-placeholder>
+        </template>
+
+       
+    </lightning-card>
+</template>

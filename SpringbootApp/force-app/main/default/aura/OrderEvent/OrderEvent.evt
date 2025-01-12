@@ -1,0 +1,3 @@
+<aura:event type="Application" description="OrderCreated">
+    <aura:attribute name="OrderId" type="String" />
+</aura:event>

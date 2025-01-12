@@ -1,0 +1,22 @@
+.THIS {
+    min-width:420px;
+    max-width:460px;
+}
+.THIS label.uiLabel {
+    padding-right: 100px;
+}
+
+.THIS .field{
+  padding: 8px;
+  border: 1px solid #dce4ec;
+  border-radius: 2px;
+  width: 400px;
+}
+.THIS .box{
+  font-weight: italic;
+  font-size: 15px;
+}
+.THIS .lisa{
+  font-weight: italic;
+  font-size: 15px;
+}
